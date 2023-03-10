@@ -229,17 +229,19 @@ CircularLinkedList<T>::Iterator::operator->()
 }
 
 template <typename T>
-bool operator==(const typename CircularLinkedList<T>::Iterator &i1,
-                const typename CircularLinkedList<T>::Iterator &i2)
+bool 
+CircularLinkedList<T>::Iterator::operator==(
+        const typename CircularLinkedList<T>::Iterator &iter)
 {
-    return (i1.container == i2.container) &&
-        (i1.currNode == i2.currNode) &&
-        (i1.index == i2.index);
+    return (this->container == iter.container) &&
+        (this->currNode == iter.currNode) &&
+        (this->index == iter.index);
 }
 
 template <typename T>
-bool operator!=(const typename CircularLinkedList<T>::Iterator &i1,
-                const typename CircularLinkedList<T>::Iterator &i2)
+bool 
+CircularLinkedList<T>::Iterator::operator!=(
+        const typename CircularLinkedList<T>::Iterator &iter)
 {
-    return !(i1 == i2);
+    return !(*this == iter);
 }

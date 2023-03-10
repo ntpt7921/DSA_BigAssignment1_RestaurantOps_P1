@@ -52,8 +52,8 @@ public:
         T &operator*();
         T *operator->();
 
-        friend bool operator==(const CircularLinkedList::Iterator &i1, const CircularLinkedList::Iterator &i2);
-        friend bool operator!=(const CircularLinkedList::Iterator &i1, const CircularLinkedList::Iterator &i2);
+        bool operator==(const Iterator &iter);
+        bool operator!=(const Iterator &iter);
     };
 };
 
