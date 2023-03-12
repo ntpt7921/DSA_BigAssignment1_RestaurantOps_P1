@@ -1,4 +1,5 @@
 #include "CommandReader.h"
+#include <iostream>
 
 bool CommandReader::isSpaceChar(char c)
 {
@@ -23,7 +24,7 @@ CircularLinkedList<std::string> * CommandReader::tokenizeLine(const std::string 
     static const std::string spaceCharList = " \t\n\v\f\r";
 
     CircularLinkedList<std::string> *result = new CircularLinkedList<std::string>();
-    bool expectSpaceTokenNext = this->isSpaceChar(line[0]);
+    bool expectSpaceTokenNext = this->isSpaceChar(line.front());
 
     if (line.empty())
         return result;
@@ -35,12 +36,12 @@ CircularLinkedList<std::string> * CommandReader::tokenizeLine(const std::string 
         {
             end = line.find_first_not_of(spaceCharList, start);
             // don't output space as token, so no format testing
-            // result->insertAtEnd(line.substr(start, end));
+            // result->insertAtEnd(line.substr(start, end - start));
         }
         else
         {
             end = line.find_first_of(spaceCharList, start);
-            result->insertAtEnd(line.substr(start, end));
+            result->insertAtEnd(line.substr(start, end - start));
         }
 
         if (end == std::string::npos)
@@ -73,7 +74,24 @@ CommandReader::~CommandReader()
     commandFile.close();
 }
 
+Command CommandReader::readNextCommand()
+{
+    // TODO: implement this
+    CircularLinkedList<std::string> *tokenList = this->getNextCommandAsTokenList();
+    Command result;
+
+    int tokenNumber= 0;
+    for (auto curr = tokenList->begin(); curr != tokenList->end(); curr++)
+    {
+        result.addTokenAsCommandDetail(*curr, tokenNumber++, tokenList->currentSize());
+    }
+
+    delete tokenList;
+    result.performSelfcheck();
+    return result;
+}
+
 bool CommandReader::canContinueReading()
 {
-    return (!commandFile); // no EOF or error has happened
+    return commandFile.good(); // no EOF or error has happened
 }

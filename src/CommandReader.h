@@ -2,6 +2,7 @@
 #define COMMANDREADER
 
 #include "CircularLinkedList.h"
+#include "Command.h"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -13,12 +14,14 @@ private:
 
     bool isSpaceChar(char c);
     CircularLinkedList<std::string> * tokenizeLine(const std::string &line);
+    CircularLinkedList<std::string> * getNextCommandAsTokenList();
 
 public:
     CommandReader(std::string _fileName);
     ~CommandReader();
 
-    CircularLinkedList<std::string> * getNextCommandAsTokenList();
+    Command readNextCommand();
+
     bool canContinueReading();
 };
 

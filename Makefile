@@ -1,5 +1,5 @@
 WARNING_FLAGS := -Wall -Wextra -Wpedantic
-OPTIMIZATION_FLAGS := -ggdb
+OPTIMIZATION_FLAGS := -ggdb -O0
 USER_ADDED_FLAGS := $(WARNING_FLAGS) $(OPTIMIZATION_FLAGS)
 
 # Taken from https://makefiletutorial.com

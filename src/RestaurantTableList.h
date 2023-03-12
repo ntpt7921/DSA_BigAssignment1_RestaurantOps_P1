@@ -9,7 +9,7 @@ class RestaurantTableList: public CircularLinkedList<RestaurantTable>
 private:
     int occupiedTableCount = 0;
     bool haveGroupTable = false;
-    int mostRecentlySeatedTableID = 0;
+    int mostRecentlyChangedTableID = 0;
 
     // return nullptr if there is no free table group, else return pointer to start of group
     // find a group of table with size groupSize, whose starting table have max tableID
@@ -30,7 +30,7 @@ public:
     // the grouping is noted as isWithinGroup and orderWithinGroup properties of RestaurantTable
     RestaurantTable *getFreeGroupTable(int groupSize);
 
-    void cleanTable(int index);
+    RestaurantTable *cleanTable(int index);
 
     void printSeatedTableFromMostRecentlySeated();
 };

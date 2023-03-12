@@ -1,10 +1,11 @@
 #include "main.h"
-#include "restaurant.cpp"
+
+void simulate(string filename, restaurant* r);
 
 int main(int argc, char* argv[]) {
 
     restaurant* r = new restaurant();
-    string fileName = "test.txt";
+    string fileName = "test/test.txt";
 
     //initialize table with ID, name and age
     for (int i = 1; i <= MAXSIZE; i++)

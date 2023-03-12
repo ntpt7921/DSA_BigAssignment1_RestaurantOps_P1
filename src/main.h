@@ -6,7 +6,7 @@
 #include<string>
 
 using namespace std;
-#define MAXSIZE 15
+#define MAXSIZE 8
 
 class table
 {
