@@ -12,7 +12,7 @@ struct RestaurantTable
     bool isFree = true;
 
     RestaurantTable(const Customer &_customerInfo, int _tableID, 
-                    bool _isWithinGroup = true, int _orderWithinGroup = -1, bool _isFree = true);
+            bool _isWithinGroup = false, int _orderWithinGroup = -1, bool _isFree = true);
 };
 
 #endif

@@ -1,1 +1,5 @@
+.cache/
 build/
+
+compile_commands.json
+todo.md

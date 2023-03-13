@@ -34,6 +34,9 @@ void CustomerWaitingQueue::prioritizeOldest(int numCustomer)
         return;
     }
 
+    if (numCustomer > this->size)
+        numCustomer  = this->size;
+
     Iterator curr = this->begin();
     for (int i = 0; i < numCustomer; i++)
     {

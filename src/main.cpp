@@ -2,18 +2,23 @@
 
 void simulate(string filename, restaurant* r);
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
 
     restaurant* r = new restaurant();
-    string fileName = "test/test.txt";
 
-    //initialize table with ID, name and age
-    for (int i = 1; i <= MAXSIZE; i++)
+    try
     {
-        r->recentTable = r->insert(r->recentTable,i,"",0);
+        for (int i = 1; i < argc; i++)
+        {
+            std::string fileName(argv[i]);
+            simulate(fileName,r);
+        }
+    }
+    catch (const char *message)
+    {
+        std::cout << message << std::endl;
     }
 
-    simulate(fileName,r);
     delete r;
 
     return 0;

@@ -1,0 +1,12 @@
+REG 7 guess1 20
+REG 8 guess2 20
+REG 9 guess3 20
+REGM guess4 20 7
+REG guess5 20
+REG guess6 20
+REG guess7 20
+REG guess8 20
+
+PS
+PQ
+PT

@@ -1,0 +1,19 @@
+REG guess1 20
+REG guess2 20
+REG guess3 20
+REGM guess4 20 7
+
+CLE 1
+CLE 2
+CLE 3
+CLE 5
+CLE 6
+CLE 7
+CLE 8
+CLE 9
+CLE 10
+CLE 4
+
+PS
+PQ
+PT

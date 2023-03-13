@@ -6,7 +6,7 @@
 #include<string>
 
 using namespace std;
-#define MAXSIZE 8
+#define MAXSIZE 10
 
 class table
 {
@@ -40,7 +40,7 @@ public:
     {
         if (last != nullptr)
             return last;
-        table *temp = new table(ID, "", age, last);
+        table *temp = new table(ID, name, age, last);
 
         last = temp;
         last->next = last;

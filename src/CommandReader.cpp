@@ -58,7 +58,7 @@ CircularLinkedList<std::string> * CommandReader::getNextCommandAsTokenList()
     if (this->canContinueReading())
         std::getline(commandFile, line);
 
-    return tokenizeLine(line);
+    return this->tokenizeLine(line);
 }
 
 CommandReader::CommandReader(std::string _fileName):

@@ -6,6 +6,9 @@
 SingleLinkedNode<RestaurantTable>* 
 RestaurantTableList::searchFreeGroupTableStartWithMaxID(int groupSize)
 {
+    if (groupSize > this->size - this->occupiedTableCount)
+        return nullptr;
+
     SingleLinkedNode<RestaurantTable> *foundGroupAt = nullptr;
 
     // try to search for table group with max starting table ID
@@ -143,6 +146,9 @@ RestaurantTable* RestaurantTableList::getFreeGroupTable(int groupSize)
 
 RestaurantTable *RestaurantTableList::cleanTable(int index)
 {
+    if (index < 0 || index > this->size - 1)
+        return nullptr;
+
     SingleLinkedNode<RestaurantTable> *toClean = this->atNode(index);
     if (toClean == nullptr)
         return nullptr;
@@ -153,7 +159,7 @@ RestaurantTable *RestaurantTableList::cleanTable(int index)
 
     SingleLinkedNode<RestaurantTable> *result = toClean;
 
-    if (!toClean->data.isWithinGroup)
+    if (toClean->data.isWithinGroup)
     {
         // starting table, disassemble the group into single table and free
         if (toClean->data.orderWithinGroup == 0)
@@ -165,6 +171,7 @@ RestaurantTable *RestaurantTableList::cleanTable(int index)
                 toClean = toClean->next;
                 this->occupiedTableCount--;
             } while (toClean->data.isWithinGroup);
+            this->haveGroupTable = false;
         }
     }
     else // is single table
@@ -182,13 +189,14 @@ void RestaurantTableList::printSeatedTableFromMostRecentlySeated()
 {
     SingleLinkedNode<RestaurantTable> *curr = this->atNode(mostRecentlyChangedTableID - 1);
 
-    for (int i = 0; i < this->size; i++)
+    for (int i = 0; i < this->size; i++, curr = curr->next)
     {
+        if (curr->data.isWithinGroup && curr->data.orderWithinGroup != 0)
+            continue;
+
         if (curr->data.isFree)
             std::cout << curr->data.tableID << '-' << "Empty" << '\n';
         else
             std::cout << curr->data.tableID << '-' << curr->data.customerInfo.name << '\n';
-
-        curr = curr->next;
     }
 }

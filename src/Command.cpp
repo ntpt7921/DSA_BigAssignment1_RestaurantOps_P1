@@ -42,10 +42,13 @@ void Command::performCommand_REG(
 
     Customer newCustomer( {this->ID, (table == nullptr) ? 0 : table->tableID, name, age} );
 
+    if (table == nullptr && waitingQueue.currentSize() >= MAXSIZE)
+        return;
+
+    // if reach here then total amount of customer is < 2 * MAXSIZE
     if (table == nullptr)
     {
-        if (waitingQueue.currentSize() < MAXSIZE)
-            waitingQueue.enqueue(newCustomer);
+        waitingQueue.enqueue(newCustomer);
     }
     else
     {

@@ -31,8 +31,6 @@ template <typename T>
 void Stack<T>::push(const T &d)
 {
     this->insertAtStart(d);
-    if (this->size > MAXSIZE)
-        this->deleteAtEnd();
 }
 
 template <typename T>
