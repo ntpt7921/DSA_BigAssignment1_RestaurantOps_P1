@@ -2,9 +2,7 @@
 #include "main.h"
 #include <iostream>
 
-CustomerWaitingQueue::CustomerWaitingQueue():
-    Queue<Customer>()
-{}
+CustomerWaitingQueue::CustomerWaitingQueue() : Queue<Customer>() { }
 
 // print customer in the queue from earliest (front) to latest (back)
 void CustomerWaitingQueue::printWaitingCustomer(int numCustomer)
@@ -30,19 +28,19 @@ void CustomerWaitingQueue::prioritizeOldest(int numCustomer)
 {
     if (this->size == 0)
     {
-        std::cout << "Empty\n"; 
+        std::cout << "Empty\n";
         return;
     }
 
     if (numCustomer > this->size)
-        numCustomer  = this->size;
+        numCustomer = this->size;
 
     Iterator curr = this->begin();
     for (int i = 0; i < numCustomer; i++)
     {
         Iterator maxAgeCustomer = curr, customer = curr;
         customer++;
-        for ( ; customer != this->end(); customer++)
+        for (; customer != this->end(); customer++)
             if (maxAgeCustomer->age < customer->age)
                 maxAgeCustomer = customer;
 
@@ -51,5 +49,5 @@ void CustomerWaitingQueue::prioritizeOldest(int numCustomer)
         curr++;
     }
 
-    this->printWaitingCustomer(MAXSIZE); // may print it like this, may change later
+    this->printWaitingCustomer(MAXSIZE);  // may print it like this, may change later
 }

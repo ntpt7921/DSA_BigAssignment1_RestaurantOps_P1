@@ -7,8 +7,8 @@ template <typename T>
 class CircularLinkedList
 {
 protected:
-    SingleLinkedNode<T> *head, *tail; 
-    int size; 
+    SingleLinkedNode<T> *head, *tail;
+    int size;
 
     SingleLinkedNode<T> *atNode(int index);
 
@@ -17,7 +17,7 @@ public:
 
     CircularLinkedList();
     ~CircularLinkedList();
-    
+
     void insertAt(const T &d, int index);
     void insertAtEnd(const T &d);
     void insertAtStart(const T &d);
@@ -44,7 +44,7 @@ public:
     public:
         Iterator();
         Iterator(const Iterator &iter);
-        Iterator &operator=(const Iterator &iter); 
+        Iterator &operator=(const Iterator &iter);
 
         ~Iterator();
 
@@ -62,7 +62,7 @@ public:
 };
 
 template <typename T>
-SingleLinkedNode<T> * CircularLinkedList<T>::atNode(int index)
+SingleLinkedNode<T> *CircularLinkedList<T>::atNode(int index)
 {
     if (this->size == 0)
         return nullptr;
@@ -74,11 +74,10 @@ SingleLinkedNode<T> * CircularLinkedList<T>::atNode(int index)
     return result;
 }
 
-
 template <typename T>
-CircularLinkedList<T>::CircularLinkedList():
-    head(nullptr), tail(nullptr), size(0)
-{}
+CircularLinkedList<T>::CircularLinkedList() : head(nullptr), tail(nullptr), size(0)
+{
+}
 
 template <typename T>
 CircularLinkedList<T>::~CircularLinkedList()
@@ -146,7 +145,7 @@ void CircularLinkedList<T>::insertAtStart(const T &d)
 
 // return the pointer to the node after deletion point
 template <typename T>
-SingleLinkedNode<T> * CircularLinkedList<T>::deleteAt(int index)
+SingleLinkedNode<T> *CircularLinkedList<T>::deleteAt(int index)
 {
     if (index < 0 || index > this->size - 1)
         return nullptr;
@@ -190,20 +189,19 @@ SingleLinkedNode<T> * CircularLinkedList<T>::deleteAt(int index)
 }
 
 template <typename T>
-SingleLinkedNode<T> * CircularLinkedList<T>::deleteAtStart()
+SingleLinkedNode<T> *CircularLinkedList<T>::deleteAtStart()
 {
     return this->deleteAt(0);
 }
 
 template <typename T>
-SingleLinkedNode<T> * CircularLinkedList<T>::deleteAtEnd()
+SingleLinkedNode<T> *CircularLinkedList<T>::deleteAtEnd()
 {
     return this->deleteAt(this->size - 1);
 }
 
 template <typename T>
-typename CircularLinkedList<T>::Iterator
-CircularLinkedList<T>::deleteAt(const Iterator &iter)
+typename CircularLinkedList<T>::Iterator CircularLinkedList<T>::deleteAt(const Iterator &iter)
 {
     if (this->end() == iter)
         return iter;
@@ -216,8 +214,7 @@ CircularLinkedList<T>::deleteAt(const Iterator &iter)
 }
 
 template <typename T>
-typename CircularLinkedList<T>::Iterator
-CircularLinkedList<T>::begin()
+typename CircularLinkedList<T>::Iterator CircularLinkedList<T>::begin()
 {
     Iterator iter;
     iter.container = this;
@@ -228,8 +225,7 @@ CircularLinkedList<T>::begin()
 }
 
 template <typename T>
-typename CircularLinkedList<T>::Iterator
-CircularLinkedList<T>::end()
+typename CircularLinkedList<T>::Iterator CircularLinkedList<T>::end()
 {
     Iterator iter;
     iter.container = this;
@@ -247,19 +243,22 @@ int CircularLinkedList<T>::currentSize()
 
 template <typename T>
 CircularLinkedList<T>::Iterator::Iterator()
-{}
+{
+}
 
 template <typename T>
-CircularLinkedList<T>::Iterator::Iterator(const Iterator &iter):
-    container(iter.container), index(iter.index), currNode(iter.currNode)
-{}
+CircularLinkedList<T>::Iterator::Iterator(const Iterator &iter)
+    : container(iter.container), index(iter.index), currNode(iter.currNode)
+{
+}
 
 template <typename T>
 CircularLinkedList<T>::Iterator::~Iterator()
-{}
+{
+}
 
 template <typename T>
-typename CircularLinkedList<T>::Iterator&
+typename CircularLinkedList<T>::Iterator &
 CircularLinkedList<T>::Iterator::operator=(const Iterator &iter)
 {
     this->container = iter.container;
@@ -270,8 +269,7 @@ CircularLinkedList<T>::Iterator::operator=(const Iterator &iter)
 }
 
 template <typename T>
-typename CircularLinkedList<T>::Iterator&
-CircularLinkedList<T>::Iterator::operator++()
+typename CircularLinkedList<T>::Iterator &CircularLinkedList<T>::Iterator::operator++()
 {
     this->currNode = this->currNode->next;
     this->index++;
@@ -280,8 +278,7 @@ CircularLinkedList<T>::Iterator::operator++()
 }
 
 template <typename T>
-typename CircularLinkedList<T>::Iterator
-CircularLinkedList<T>::Iterator::operator++(int)
+typename CircularLinkedList<T>::Iterator CircularLinkedList<T>::Iterator::operator++(int)
 {
     CircularLinkedList<T>::Iterator result(*this);
     ++(*this);
@@ -290,32 +287,27 @@ CircularLinkedList<T>::Iterator::operator++(int)
 }
 
 template <typename T>
-T&
-CircularLinkedList<T>::Iterator::operator*()
+T &CircularLinkedList<T>::Iterator::operator*()
 {
     return this->currNode->data;
 }
 
 template <typename T>
-T*
-CircularLinkedList<T>::Iterator::operator->()
+T *CircularLinkedList<T>::Iterator::operator->()
 {
     return &(this->currNode->data);
 }
 
 template <typename T>
-bool 
-CircularLinkedList<T>::Iterator::operator==(
-        const typename CircularLinkedList<T>::Iterator &iter)
+bool CircularLinkedList<T>::Iterator::operator==(
+    const typename CircularLinkedList<T>::Iterator &iter)
 {
-    return (this->container == iter.container) &&
-        (this->index == iter.index);
+    return (this->container == iter.container) && (this->index == iter.index);
 }
 
 template <typename T>
-bool 
-CircularLinkedList<T>::Iterator::operator!=(
-        const typename CircularLinkedList<T>::Iterator &iter)
+bool CircularLinkedList<T>::Iterator::operator!=(
+    const typename CircularLinkedList<T>::Iterator &iter)
 {
     return !(*this == iter);
 }

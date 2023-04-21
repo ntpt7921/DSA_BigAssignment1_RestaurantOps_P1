@@ -1,10 +1,10 @@
 #ifndef RESTAURANTTABLELIST
 #define RESTAURANTTABLELIST
 
-#include "RestaurantTable.h"
 #include "CircularLinkedList.h"
+#include "RestaurantTable.h"
 
-class RestaurantTableList: public CircularLinkedList<RestaurantTable>
+class RestaurantTableList : public CircularLinkedList<RestaurantTable>
 {
 private:
     int occupiedTableCount = 0;

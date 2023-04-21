@@ -4,7 +4,7 @@
 #include "Customer.h"
 #include "Stack.h"
 
-class CustomerPresentStack: public Stack<Customer>
+class CustomerPresentStack : public Stack<Customer>
 {
 public:
     CustomerPresentStack();

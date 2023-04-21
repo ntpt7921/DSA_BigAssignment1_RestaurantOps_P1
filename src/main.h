@@ -1,9 +1,9 @@
 #ifndef MAIN_H
 #define MAIN_H
-#include<iostream>
-#include<cmath>
-#include<fstream>
-#include<string>
+#include <cmath>
+#include <fstream>
+#include <iostream>
+#include <string>
 
 using namespace std;
 #define MAXSIZE 10
@@ -14,8 +14,9 @@ public:
     int ID;
     string name;
     int age;
-    table* next;
-    table(int ID, string name, int age, table* next)
+    table *next;
+
+    table(int ID, string name, int age, table *next)
     {
         this->ID = ID;
         this->name = name;
@@ -28,15 +29,12 @@ class restaurant
 {
 public:
     table *recentTable;
-    restaurant()
-    {
-        recentTable = nullptr;
-    }
-    ~restaurant()
-    {
-        delete recentTable;
-    }
-    table* finsert(table *last, int ID, string name, int age)
+
+    restaurant() { recentTable = nullptr; }
+
+    ~restaurant() { delete recentTable; }
+
+    table *finsert(table *last, int ID, string name, int age)
     {
         if (last != nullptr)
             return last;
@@ -46,12 +44,13 @@ public:
         last->next = last;
         return last;
     }
+
     table *insert(table *last, int ID, string name, int age)
     {
         if (last == NULL)
             return finsert(last, ID, name, age);
-        table *temp = new table (ID, name, age, last->next);
-        last -> next = temp;
+        table *temp = new table(ID, name, age, last->next);
+        last->next = temp;
         last = temp;
         return last;
     }

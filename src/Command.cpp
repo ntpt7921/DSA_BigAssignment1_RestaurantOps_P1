@@ -2,20 +2,17 @@
 #include "Customer.h"
 #include "RestaurantTable.h"
 
-Command::Command():
-    type(CommandType::INVALID), ID(0), name(), age(0), num(0)
-{}
+Command::Command() : type(CommandType::INVALID), ID(0), name(), age(0), num(0) { }
 
-Command::Command(const Command &c):
-    type(c.type), ID(c.ID), name(c.name), age(c.age), num(c.num)
-{}
+Command::Command(const Command &c)
+    : type(c.type), ID(c.ID), name(c.name), age(c.age), num(c.num) { }
 
-Command::Command(CommandType _type, int _ID, std::string _name, int _age, int _num):
-    type(_type), ID(_ID), name(_name), age(_age), num(_num)
-{}
+Command::Command(CommandType _type, int _ID, std::string _name, int _age, int _num)
+    : type(_type), ID(_ID), name(_name), age(_age), num(_num)
+{
+}
 
-Command::~Command()
-{}
+Command::~Command() { }
 
 Command &Command::operator=(const Command &c)
 {
@@ -28,10 +25,8 @@ Command &Command::operator=(const Command &c)
     return *this;
 }
 
-void Command::performCommand_REG(
-        RestaurantTableList &tableList,
-        CustomerPresentStack &presentStack,
-        CustomerWaitingQueue &waitingQueue)
+void Command::performCommand_REG(RestaurantTableList &tableList, CustomerPresentStack &presentStack,
+                                 CustomerWaitingQueue &waitingQueue)
 {
 
     RestaurantTable *table = nullptr;
@@ -40,7 +35,7 @@ void Command::performCommand_REG(
     else
         table = tableList.getFreeSingleTableFromIndex(this->ID - 1);
 
-    Customer newCustomer( {this->ID, (table == nullptr) ? 0 : table->tableID, name, age} );
+    Customer newCustomer({this->ID, (table == nullptr) ? 0 : table->tableID, name, age});
 
     if (table == nullptr && waitingQueue.currentSize() >= MAXSIZE)
         return;
@@ -59,9 +54,8 @@ void Command::performCommand_REG(
     presentStack.push(newCustomer);
 }
 
-void Command::performCommand_REGM(
-        RestaurantTableList &tableList,
-        CustomerPresentStack &presentStack)
+void Command::performCommand_REGM(RestaurantTableList &tableList,
+                                  CustomerPresentStack &presentStack)
 {
     if (tableList.alreadyHaveGroupTable())
         return;
@@ -70,17 +64,15 @@ void Command::performCommand_REGM(
     if (table == nullptr)
         return;
 
-    Customer newCustomer( {0, table->tableID, name, age} );
+    Customer newCustomer({0, table->tableID, name, age});
     table->customerInfo = newCustomer;
     table->isFree = false;
 
     presentStack.push(newCustomer);
 }
 
-void Command::performCommand_CLE(
-        RestaurantTableList &tableList,
-        CustomerPresentStack &presentStack,
-        CustomerWaitingQueue &waitingQueue)
+void Command::performCommand_CLE(RestaurantTableList &tableList, CustomerPresentStack &presentStack,
+                                 CustomerWaitingQueue &waitingQueue)
 {
     RestaurantTable *cleanAtTable = tableList.cleanTable(this->ID - 1);
     if (cleanAtTable != nullptr)
@@ -122,10 +114,9 @@ void Command::performCommand_SQ(CustomerWaitingQueue &waitingQueue)
     waitingQueue.prioritizeOldest(num);
 }
 
-void Command::performEncodedOperation(
-        RestaurantTableList &tableList,
-        CustomerPresentStack &presentStack,
-        CustomerWaitingQueue &waitingQueue)
+void Command::performEncodedOperation(RestaurantTableList &tableList,
+                                      CustomerPresentStack &presentStack,
+                                      CustomerWaitingQueue &waitingQueue)
 {
     switch (this->type)
     {
@@ -306,7 +297,4 @@ void Command::performSelfcheck()
         }
 }
 
-bool Command::isValid()
-{
-    return (this->type != CommandType::INVALID);
-}
+bool Command::isValid() { return (this->type != CommandType::INVALID); }

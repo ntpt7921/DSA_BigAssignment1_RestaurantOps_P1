@@ -3,7 +3,7 @@
 
 // return nullptr if there is no free table group, else return pointer to start of group
 // find a group of table with size groupSize, whose starting table have max tableID
-SingleLinkedNode<RestaurantTable>* 
+SingleLinkedNode<RestaurantTable> *
 RestaurantTableList::searchFreeGroupTableStartWithMaxID(int groupSize)
 {
     if (groupSize > this->size - this->occupiedTableCount)
@@ -14,9 +14,8 @@ RestaurantTableList::searchFreeGroupTableStartWithMaxID(int groupSize)
     // try to search for table group with max starting table ID
     // have to add a counter so that we know when to stop (this is a circular linked list)
     SingleLinkedNode<RestaurantTable> *curr = this->head;
-    for (int testedGroupCount = 0; 
-            testedGroupCount < this->size; 
-            testedGroupCount++, curr = curr->next)
+    for (int testedGroupCount = 0; testedGroupCount < this->size;
+         testedGroupCount++, curr = curr->next)
     {
         if (!curr->data.isFree)
             continue;
@@ -24,8 +23,7 @@ RestaurantTableList::searchFreeGroupTableStartWithMaxID(int groupSize)
         bool groupValid = true;
         SingleLinkedNode<RestaurantTable> *test = curr->next;
         int orderWithinGroup = 1;
-        for ( ; orderWithinGroup < groupSize;
-                orderWithinGroup++, test = test->next)
+        for (; orderWithinGroup < groupSize; orderWithinGroup++, test = test->next)
         {
             if (!test->data.isFree)
             {
@@ -48,37 +46,28 @@ RestaurantTableList::searchFreeGroupTableStartWithMaxID(int groupSize)
         }
     }
 
-
     if (foundGroupAt == nullptr)
         return nullptr;
     else
         return foundGroupAt;
 }
 
-
-RestaurantTableList::RestaurantTableList(int numTable):
-    CircularLinkedList<RestaurantTable>()
+RestaurantTableList::RestaurantTableList(int numTable) : CircularLinkedList<RestaurantTable>()
 {
     for (int i = 0; i < numTable; i++)
         this->insertAtEnd(RestaurantTable(Customer(), i + 1));
 }
 
-bool RestaurantTableList::isAllFull()
-{
-    return (occupiedTableCount >= this->size);
-}
+bool RestaurantTableList::isAllFull() { return (occupiedTableCount >= this->size); }
 
-bool RestaurantTableList::alreadyHaveGroupTable()
-{
-    return this->haveGroupTable;
-}
+bool RestaurantTableList::alreadyHaveGroupTable() { return this->haveGroupTable; }
 
 // return nullptr if there is no free table
-RestaurantTable* RestaurantTableList::getFreeSingleTableFromIndex(int index)
+RestaurantTable *RestaurantTableList::getFreeSingleTableFromIndex(int index)
 {
     if (occupiedTableCount >= this->size)
         return nullptr;
-    
+
     // test if the table at index is free
     SingleLinkedNode<RestaurantTable> *currTable = this->atNode(index);
     if (currTable == nullptr)
@@ -114,12 +103,12 @@ RestaurantTable* RestaurantTableList::getFreeSingleTableFromIndex(int index)
 // result nullptr if no group table is possible, else return pointer to starting table of group
 // if there is possible group, all table within that group is grouped together
 // the grouping is noted as isWithinGroup and orderWithinGroup properties of RestaurantTable
-RestaurantTable* RestaurantTableList::getFreeGroupTable(int groupSize)
+RestaurantTable *RestaurantTableList::getFreeGroupTable(int groupSize)
 {
     if (this->haveGroupTable)
         return nullptr;
 
-    SingleLinkedNode<RestaurantTable> *groupStart = 
+    SingleLinkedNode<RestaurantTable> *groupStart =
         this->searchFreeGroupTableStartWithMaxID(groupSize);
 
     if (groupStart == nullptr)
@@ -164,7 +153,8 @@ RestaurantTable *RestaurantTableList::cleanTable(int index)
         // starting table, disassemble the group into single table and free
         if (toClean->data.orderWithinGroup == 0)
         {
-            do {
+            do
+            {
                 toClean->data.isWithinGroup = false;
                 toClean->data.orderWithinGroup = -1;
                 toClean->data.isFree = true;
@@ -174,7 +164,7 @@ RestaurantTable *RestaurantTableList::cleanTable(int index)
             this->haveGroupTable = false;
         }
     }
-    else // is single table
+    else  // is single table
     {
         toClean->data.isFree = true;
         this->occupiedTableCount--;
@@ -183,7 +173,6 @@ RestaurantTable *RestaurantTableList::cleanTable(int index)
     this->mostRecentlyChangedTableID = result->data.tableID;
     return &(result->data);
 }
-
 
 void RestaurantTableList::printSeatedTableFromMostRecentlySeated()
 {

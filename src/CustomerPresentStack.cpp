@@ -1,9 +1,6 @@
 #include "CustomerPresentStack.h"
 
-
-CustomerPresentStack::CustomerPresentStack(): 
-    Stack<Customer>()
-{}
+CustomerPresentStack::CustomerPresentStack() : Stack<Customer>() { }
 
 void CustomerPresentStack::printRecentHistory(int numEntry)
 {

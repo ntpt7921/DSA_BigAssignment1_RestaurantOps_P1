@@ -1,10 +1,10 @@
 #ifndef CUSTOMERWAITINGQUEUE
 #define CUSTOMERWAITINGQUEUE
 
-#include "Queue.h"
 #include "Customer.h"
+#include "Queue.h"
 
-class CustomerWaitingQueue: public Queue<Customer>
+class CustomerWaitingQueue : public Queue<Customer>
 {
 public:
     CustomerWaitingQueue();

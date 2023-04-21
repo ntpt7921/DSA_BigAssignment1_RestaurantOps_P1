@@ -1,11 +1,11 @@
 #ifndef STACK
 #define STACK
 
-#include "main.h"
 #include "CircularLinkedList.h"
+#include "main.h"
 
 template <typename T>
-class Stack: public CircularLinkedList<T>
+class Stack : public CircularLinkedList<T>
 {
 public:
 
@@ -19,13 +19,14 @@ public:
 };
 
 template <typename T>
-Stack<T>::Stack(): 
-    CircularLinkedList<T>()
-{}
+Stack<T>::Stack() : CircularLinkedList<T>()
+{
+}
 
 template <typename T>
 Stack<T>::~Stack()
-{}
+{
+}
 
 template <typename T>
 void Stack<T>::push(const T &d)
@@ -40,9 +41,9 @@ void Stack<T>::pop()
 }
 
 template <typename T>
-T& Stack<T>::top()
+T &Stack<T>::top()
 {
-    return this->head->data; 
+    return this->head->data;
 }
 
 #endif

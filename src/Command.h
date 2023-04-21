@@ -28,15 +28,12 @@ private:
     int age;
     int num;
 
-    void performCommand_REG(RestaurantTableList &tableList,
-                            CustomerPresentStack &presentStack,
+    void performCommand_REG(RestaurantTableList &tableList, CustomerPresentStack &presentStack,
                             CustomerWaitingQueue &waitingQueue);
 
-    void performCommand_REGM(RestaurantTableList &tableList,
-                             CustomerPresentStack &presentStack);
+    void performCommand_REGM(RestaurantTableList &tableList, CustomerPresentStack &presentStack);
 
-    void performCommand_CLE(RestaurantTableList &tableList,
-                            CustomerPresentStack &presentStack,
+    void performCommand_CLE(RestaurantTableList &tableList, CustomerPresentStack &presentStack,
                             CustomerWaitingQueue &waitingQueue);
 
     void performCommand_PS(CustomerPresentStack &presentStack);
@@ -55,8 +52,7 @@ public:
 
     Command &operator=(const Command &c);
 
-    void performEncodedOperation(RestaurantTableList &tableList,
-                                 CustomerPresentStack &presentStack,
+    void performEncodedOperation(RestaurantTableList &tableList, CustomerPresentStack &presentStack,
                                  CustomerWaitingQueue &waitingQueue);
 
     void addTokenAsCommandType(const std::string &token);
@@ -66,7 +62,7 @@ public:
     void performSelfcheck();
     bool isValid();
 
-    friend class CommandReader; // very interesting that this does not required forward declaration
+    friend class CommandReader;  // very interesting that this does not required forward declaration
 };
 
 #endif

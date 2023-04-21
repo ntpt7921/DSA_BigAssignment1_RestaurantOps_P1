@@ -13,8 +13,8 @@ private:
     std::ifstream commandFile;
 
     bool isSpaceChar(char c);
-    CircularLinkedList<std::string> * tokenizeLine(const std::string &line);
-    CircularLinkedList<std::string> * getNextCommandAsTokenList();
+    CircularLinkedList<std::string> *tokenizeLine(const std::string &line);
+    CircularLinkedList<std::string> *getNextCommandAsTokenList();
 
 public:
     CommandReader(std::string _fileName);
